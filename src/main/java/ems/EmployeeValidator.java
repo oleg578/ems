@@ -1,5 +1,6 @@
 package ems;
 
+import java.util.List;
 import java.util.Objects;
 
 public class EmployeeValidator {
@@ -44,6 +45,18 @@ public class EmployeeValidator {
     public static void isFiniteSalary(double salaryValue) {
         if (!Double.isFinite(salaryValue)) {
             throw new IllegalArgumentException("salary must be a finite number, got: " + salaryValue);
+        }
+    }
+
+    public static void isNull(Employee employee) {
+        if (employee == null) {
+            throw new NullPointerException("employee must not be null");
+        }
+    }
+
+    public static void listOfEmployeesIsNull(List<Employee> employees) {
+        if (employees == null) {
+            throw new NullPointerException("employees must not be null");
         }
     }
 }

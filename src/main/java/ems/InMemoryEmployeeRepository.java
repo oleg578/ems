@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
 
     @Override
     public void add(Employee employee) {
-        Objects.requireNonNull(employee, "employee must not be null");
+       EmployeeValidator.isNull(employee);
         if (employeesByName.putIfAbsent(employee.getName(), employee) != null) {
             throw new IllegalArgumentException("employee already exists: " + employee.getName());
         }
@@ -23,11 +22,11 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
 
     @Override
     public void addAll(List<Employee> employees) {
-        Objects.requireNonNull(employees, "employees must not be null");
+        EmployeeValidator.listOfEmployeesIsNull(employees);
         // Validate everything first, so a failure leaves the map untouched
         Set<String> newNames = new HashSet<>();
         for (Employee employee : employees) {
-            Objects.requireNonNull(employee, "employee must not be null");
+            EmployeeValidator.isNull(employee);
             String name = employee.getName();
             if (employeesByName.containsKey(name) || !newNames.add(name)) {
                 throw new IllegalArgumentException("employee already exists: " + name);
@@ -46,7 +45,7 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
 
     @Override
     public void updateAll(List<Employee> employees) {
-        Objects.requireNonNull(employees, "employees must not be null");
+        EmployeeValidator.listOfEmployeesIsNull(employees);
         // Validate everything first, so a failure leaves the map untouched
         for (Employee employee : employees) {
             requireStoredWithSameRole(employee);
@@ -58,7 +57,7 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
 
     // An update must not silently turn e.g. a Developer into a Manager
     private void requireStoredWithSameRole(Employee employee) {
-        Objects.requireNonNull(employee, "employee must not be null");
+        EmployeeValidator.isNull(employee);
         Employee stored = employeesByName.get(employee.getName());
         if (stored == null) {
             throw new IllegalArgumentException("employee not found: " + employee.getName());
