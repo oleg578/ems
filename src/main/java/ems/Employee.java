@@ -7,6 +7,7 @@ public abstract sealed class Employee permits Developer, Manager {
 
     private final String name;
     private final double salary;
+    private final String role;
 
     protected Employee(String name, double salary) {
         EmployeeValidator.validateName(name);
@@ -15,9 +16,12 @@ public abstract sealed class Employee permits Developer, Manager {
         EmployeeValidator.validateSalary(roundedSalary);
         this.name = name;
         this.salary = roundedSalary;
+        role = this.getClass().getSimpleName();
     }
 
-    public abstract String getRole();
+    public String getRole() {
+        return role;
+    }
 
     public String getName() {
         return name;

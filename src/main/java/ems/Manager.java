@@ -10,9 +10,4 @@ public final class Manager extends Employee {
     protected Manager withSalary(double salary) {
         return new Manager(getName(), salary);
     }
-
-    @Override
-    public String getRole() {
-        return "Manager";
-    }
 }

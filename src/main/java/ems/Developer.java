@@ -10,9 +10,4 @@ public final class Developer extends Employee {
     protected Developer withSalary(double salary) {
         return new Developer(getName(), salary);
     }
-
-    @Override
-    public String getRole() {
-        return "Developer";
-    }
 }
