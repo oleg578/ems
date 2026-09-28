@@ -52,7 +52,7 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
         }
     }
 
-    // An update must not silently turn e.g. a Developer into a Manager
+    // An update must not silently turn, e.g., a Developer into a Manager
     private void requireStoredWithSameRole(Employee employee) {
         Objects.requireNonNull(employee, NULL_EMPLOYEE_NAME);
         Employee stored = employeesByName.get(employee.getName());
