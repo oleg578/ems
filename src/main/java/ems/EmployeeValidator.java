@@ -47,16 +47,4 @@ public class EmployeeValidator {
             throw new IllegalArgumentException("salary must be a finite number, got: " + salaryValue);
         }
     }
-
-    public static void isNull(Employee employee) {
-        if (employee == null) {
-            throw new NullPointerException("employee must not be null");
-        }
-    }
-
-    public static void listOfEmployeesIsNull(List<Employee> employees) {
-        if (employees == null) {
-            throw new NullPointerException("employees must not be null");
-        }
-    }
 }
